@@ -1,0 +1,102 @@
+# ---------------------------------------------------------------
+# CommunityGoal - config.yml
+# Edit, save, then run /communitygoal reload (or restart the server).
+# ---------------------------------------------------------------
+
+# Only these worlds count progress AND show the boss bar AND allow /reward.
+# Put your SURVIVAL world names here (NOT lobby, NOT duels, NOT bedwars).
+worlds:
+  - world
+  - world_nether
+  - world_the_end
+
+# Boss bar look: PROGRESS, NOTCHED_6, NOTCHED_10, NOTCHED_12, NOTCHED_20
+bar-style: NOTCHED_10
+
+# false = goals go in order, true = random goal each time
+random-order: false
+
+# Rest time after a goal is completed, before the next one starts
+delay-between-goals-minutes: 10
+
+# Ores a player placed and re-broke within this many minutes do not count
+ignore-recently-placed-minutes: 10
+
+# Goal target = base-target + per-player * (players online in survival worlds
+# at the moment the goal starts). More players -> bigger goal.
+# type: ORES | MOBS | FISH | CROPS
+# color: PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE
+goals:
+  ores:
+    type: ORES
+    display: "Mine ores"
+    color: YELLOW
+    base-target: 300
+    per-player: 100
+  mobs:
+    type: MOBS
+    display: "Slay hostile mobs"
+    color: RED
+    base-target: 250
+    per-player: 80
+  fish:
+    type: FISH
+    display: "Catch fish"
+    color: BLUE
+    base-target: 100
+    per-player: 40
+  crops:
+    type: CROPS
+    display: "Harvest fully grown crops"
+    color: GREEN
+    base-target: 400
+    per-player: 150
+
+# ---------------------------------------------------------------
+# REWARDS (claimed with /reward, never given directly)
+# A player's share = (their contribution / goal target) * 100.
+# They get the items of the HIGHEST tier whose min-percent they reached.
+# items format: MATERIAL:amount (amount 1-64). Netherite is always blocked.
+# ---------------------------------------------------------------
+reward-tiers:
+  - min-percent: 1
+    label: "Helper"
+    items: ["COAL:5"]
+  - min-percent: 10
+    label: "Coal Miner"
+    items: ["COAL:10"]
+  - min-percent: 20
+    label: "Iron Worker"
+    items: ["IRON_INGOT:10"]
+  - min-percent: 30
+    label: "Gold Hunter"
+    items: ["GOLD_INGOT:10"]
+  - min-percent: 40
+    label: "Emerald Seeker"
+    items: ["EMERALD:8"]
+  - min-percent: 50
+    label: "Diamond Champion"
+    items: ["DIAMOND:10"]
+  - min-percent: 75
+    label: "Server Legend"
+    items: ["DIAMOND:15"]
+
+# All texts use MiniMessage (https://docs.advntr.dev/minimessage/format.html)
+messages:
+  bar-title: "<gold><bold>SERVER GOAL <white>{goal} <dark_gray>| <yellow>{progress}<gray>/<yellow>{target} <gray>(<white>{percent}%<gray>)"
+  bar-cooldown: "<green><bold>GOAL COMPLETE! <gray>Next goal in <white>{time}"
+  goal-started: "<gradient:#FFD700:#FF8C00><bold>NEW SERVER GOAL:</bold></gradient> <white>{goal} <gray>- target <yellow>{target}<gray>. Everyone in survival helps!"
+  milestone: "<gold>Server goal <white>{goal} <gold>is <yellow>{percent}%<gold> done! Keep going!"
+  goal-complete: "<gradient:#00FF87:#60EFFF><bold>SERVER GOAL COMPLETE!</bold></gradient> <white>{goal}<newline><gray>Top helpers: {top}"
+  reward-announce: "<gradient:#FFD700:#FF8C00><bold>* {player} *</bold></gradient> <gradient:#7CFC00:#00E5FF>Congrats! You have contributed to complete the community task!</gradient> <yellow>({percent}% of the work)<newline><gradient:#FF69B4:#FFD700>Type <click:run_command:'/reward'><hover:show_text:'Click to claim'><bold>/reward</bold></hover></click> in chat to claim your reward!</gradient>"
+  reward-title: "<gradient:#FFD700:#FF8C00><bold>TASK COMPLETE!</bold></gradient>"
+  reward-subtitle: "<gradient:#7CFC00:#00E5FF>Type /reward to claim your reward</gradient>"
+  reward-pending: "<gradient:#FFD700:#FF8C00><bold>Welcome back {player}!</bold></gradient> <gradient:#7CFC00:#00E5FF>You have {count} unclaimed community reward(s) waiting!</gradient><newline><gradient:#FF69B4:#FFD700>Type <click:run_command:'/reward'><hover:show_text:'Click to claim'><bold>/reward</bold></hover></click> in chat to claim your reward!</gradient>"
+  reward-claimed: "<green><bold>Reward claimed! <gray>You received: {items}"
+  reward-none: "<gray>You have no rewards to claim right now."
+  reward-wrong-world: "<red>Go to the survival world to claim your reward!"
+  cmd-progress: "<gold>Goal: <white>{goal} <gray>| <yellow>{progress}<gray>/<yellow>{target} <gray>| Your share: <white>{mine} <gray>| Goals done: <white>{completed}"
+  cmd-cooldown: "<green>Goal complete! Next goal in <white>{time}"
+  cmd-top: "<gold>Top helpers: {top}"
+  cmd-reloaded: "<green>CommunityGoal config reloaded."
+  no-permission: "<red>You do not have permission."
